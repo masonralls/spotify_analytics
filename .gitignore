@@ -1,0 +1,58 @@
+# Root .gitignore for the repository
+
+# Ignore project data (large / changing runtime files)
+/data/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+pip-wheel-metadata/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Test, coverage, caches
+.pytest_cache/
+.mypy_cache/
+.cache/
+.coverage
+coverage.xml
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Windows / OneDrive temp files
+~$*
+~*.*
+*.tmp
+
+# Logs
+*.log
+
+# Optional: ignore model artifacts and exported reports
+/models/
+/reports/
+
+# Keep package source tracked (the package folder `spotify_analytics/` is tracked)
+# if you want to allow some data subfolders, remove them from the rules above.
