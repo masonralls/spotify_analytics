@@ -8,12 +8,24 @@ def upsert_track_metadata(conn, track):
     name = track["name"]
     popularity = track.get("popularity")
 
-    # Album data
-    album = track["album"]
-    album_id = album["id"]
-    album_name = album["name"]
-    release_date = album.get("release_date")
+    album = track.get("album", {})
+    album_id = album.get("id")
+    album_name = album.get("name")
+    release_date_raw = album.get("release_date")
     total_tracks = album.get("total_tracks")
+
+# --- Normalize release_date to a full YYYY-MM-DD string or None ---
+    release_date = None
+    if release_date_raw:
+        # Year only: "2006"
+        if len(release_date_raw) == 4:
+            release_date = f"{release_date_raw}-01-01"
+        # Year-month: "2006-05"
+        elif len(release_date_raw) == 7:
+            release_date = f"{release_date_raw}-01"
+    # Full date: "2006-05-12"
+        else:
+            release_date = release_date_raw
 
     # --- UPSERT album ---
     conn.execute(text("""
